@@ -12,6 +12,7 @@
     gtag('js', new Date());
     gtag('config', 'G-2BYZNSF0C5');
 
+    // Function to send a page view with dummy data
     function sendFakePageView(pageTitle, screenName) {
       gtag('event', 'page_view', {
         'page_title': pageTitle,
@@ -19,6 +20,7 @@
       });
     }
 
+    // Generate dummy data for real-time simulation
     function generateFakePageViews() {
       const pages = [
         { title: 'Home Page', screen: 'home' },
@@ -40,15 +42,16 @@
       }
     }
 
+    // Generate fake user metrics
     function generateFakeUserMetrics() {
       const userProperties = ['new_user', 'returning_user', 'subscribed_user'];
       const sources = ['direct', 'organic_search', 'referral', 'social'];
-      const locations = ['New York', 'San Francisco', 'London', 'Tokyo', 'Berlin'];
+      const locations = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'];
       const ages = ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'];
       const browsers = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Opera'];
-      const countries = ['USA', 'UK', 'Japan', 'Germany', 'France'];
-      const emails = ['user@example.com', 'user2@example.com', 'user3@example.com'];
-      
+      const countries = ['USA', 'Canada', 'UK', 'Australia', 'Germany'];
+      const emails = ['user1@example.com', 'user2@example.com', 'user3@example.com', 'user4@example.com', 'user5@example.com'];
+
       for (let i = 0; i < 40; i++) {
         const randomUserProperty = userProperties[Math.floor(Math.random() * userProperties.length)];
         const randomSource = sources[Math.floor(Math.random() * sources.length)];
@@ -57,7 +60,7 @@
         const randomBrowser = browsers[Math.floor(Math.random() * browsers.length)];
         const randomCountry = countries[Math.floor(Math.random() * countries.length)];
         const randomEmail = emails[Math.floor(Math.random() * emails.length)];
-        const randomDate = new Date(+(new Date()) - Math.floor(Math.random()*10000000000)).toISOString().split('T')[0];  // Random date in YYYY-MM-DD format
+        const randomDate = new Date(+(new Date()) - Math.floor(Math.random() * 10000000000)); // Random date in past
 
         gtag('event', 'user_engagement', {
           'user_property': randomUserProperty,
@@ -68,136 +71,131 @@
           'user_country': randomCountry,
           'user_email': randomEmail,
           'event_name': 'user_activity',
-          'engagement_time': Math.floor(Math.random() * 300) + 30,
-          'event_date': randomDate
+          'engagement_time': Math.floor(Math.random() * 300) + 30,  // Engagement time between 30s to 330s
+          'event_date': randomDate.toISOString()
         });
       }
     }
 
+    // Trigger the fake page view generation and user metrics when the page loads
     window.onload = function() {
       generateFakePageViews();
       generateFakeUserMetrics();
     };
+
+    // Function to refresh the page with pop animation
+    function refreshPage() {
+      const refreshButton = document.getElementById('refreshButton');
+      refreshButton.classList.add('pop');
+      setTimeout(() => {
+        window.location.reload();
+      }, 500); // Wait for the animation to complete
+    }
   </script>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      color: #333;
       margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    .container {
-      text-align: center;
       padding: 20px;
+      overflow-x: hidden;
     }
-    .header {
+    h1 {
       background: #0073e6;
       color: white;
-      padding: 20px;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1000;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 20px;
     }
-    .button-container {
-      margin: 50px 0;
+    p {
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
     }
-    .page-button {
+    .button {
       display: inline-block;
-      background-color: #0073e6;
-      color: white;
       padding: 10px 20px;
-      margin: 10px;
+      margin: 5px;
+      color: white;
+      background-color: #0073e6;
+      border: none;
       border-radius: 5px;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 16px;
+      cursor: pointer;
       transition: background-color 0.3s, transform 0.3s;
     }
-    .page-button:hover {
+    .button:hover {
       background-color: #005bb5;
       transform: scale(1.05);
+    }
+    .button:active {
+      transform: scale(0.95);
     }
     .page-content {
       display: none;
       padding: 20px;
+      border-radius: 5px;
+      color: white;
+      font-size: 24px;
+      text-align: center;
+      height: 300px;
       background-size: cover;
       background-position: center;
-      height: 80vh;
-      color: white;
     }
-    .refresh-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ff5722;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      font-size: 20px;
-      transition: transform 0.3s, box-shadow 0.3s;
+    .home-content { background-image: url('home-bg.jpg'); }
+    .about-content { background-image: url('about-bg.jpg'); }
+    .contact-content { background-image: url('contact-bg.jpg'); }
+    .services-content { background-image: url('services-bg.jpg'); }
+    .products-content { background-image: url('products-bg.jpg'); }
+    .blog-content { background-image: url('blog-bg.jpg'); }
+    .faq-content { background-image: url('faq-bg.jpg'); }
+    .careers-content { background-image: url('careers-bg.jpg'); }
+    .testimonials-content { background-image: url('testimonials-bg.jpg'); }
+    .privacy_policy-content { background-image: url('privacy-policy-bg.jpg'); }
+    .pop {
+      animation: pop 0.5s ease;
     }
-    .refresh-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    }
-    .animated-home {
-      animation: slideIn 1s ease-in-out;
-    }
-    @keyframes slideIn {
-      from {
-        transform: translateY(-100%);
-      }
-      to {
-        transform: translateY(0);
-      }
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1 class="animated-home">Website Analytics Simulation</h1>
-  </div>
-  <div class="container">
-    <div class="button-container">
-      <a href="#" class="page-button" onclick="showPage('home')">Home</a>
-      <a href="#" class="page-button" onclick="showPage('about')">About Us</a>
-      <a href="#" class="page-button" onclick="showPage('contact')">Contact Us</a>
-      <a href="#" class="page-button" onclick="showPage('services')">Our Services</a>
-      <a href="#" class="page-button" onclick="showPage('products')">Our Products</a>
-      <a href="#" class="page-button" onclick="showPage('blog')">Blog</a>
-      <a href="#" class="page-button" onclick="showPage('faq')">FAQ</a>
-      <a href="#" class="page-button" onclick="showPage('careers')">Careers</a>
-      <a href="#" class="page-button" onclick="showPage('testimonials')">Testimonials</a>
-      <a href="#" class="page-button" onclick="showPage('privacy_policy')">Privacy Policy</a>
-    </div>
-    <div id="home" class="page-content" style="background-image: url('home-bg.jpg');">
-      <h2>Welcome to the Home Page!</h2>
-    </div>
-    <div id="about" class="page-content" style="background-image: url('about-bg.jpg');">
-      <h2>Welcome to the About Us Page!</h2>
-    </div>
-    <div id="contact" class="page-content" style="background-image: url('contact-bg.jpg');">
-      <h2>Welcome to the Contact Us Page!</h2>
-    </div>
-    <div id="services" class="page-content" style="background-image: url('services-bg.jpg');">
-      <h2>Welcome to the Our Services Page!</h2>
-    </div>
-    <div id="products" class="page-content" style="background-image: url('products-bg.jpg');">
-      <h2>Welcome to the Our Products Page!</h2>
-    </div>
-    <div id="blog" class="page-content" style="background-image: url('blog-bg.jpg');">
-      <h2>Welcome to the Blog Page!</h2>
-    </div>
-    <div id="faq" class="page-content" style="background-image: url('faq-bg.jpg');">
-      <h2>Welcome to the FAQ Page!</h2>
-    </div>
-    <div id="careers" class="page-content" style="background-image: url('careers-bg.jpg');">
-      <h2>Welcome to the Careers Page!</h2>
-    </div>
-    <div id="testimonials" class="page-content" style="background-image: url('testimonials-bg.jpg');">
-      <h2>Welcome to the Testimonials Page!</h2>
-    </div>
-   
+  <h1>Website Analytics Simulation</h1>
+  <p>This Website Created to Test Google Analytics Events For Kashish</p>
+  <p>Additional user engagement metrics are also generated for simulation purposes.</p>
+
+  <button class="button" onclick="showPage('home')">Home</button>
+  <button class="button" onclick="showPage('about')">About Us</button>
+  <button class="button" onclick="showPage('contact')">Contact Us</button>
+  <button class="button" onclick="showPage('services')">Our Services</button>
+  <button class="button" onclick="showPage('products')">Our Products</button>
+  <button class="button" onclick="showPage('blog')">Blog</button>
+  <button class="button" onclick="showPage('faq')">FAQ</button>
+  <button class="button" onclick="showPage('careers')">Careers</button>
+  <button class="button" onclick="showPage('testimonials')">Testimonials</button>
+  <button class="button" onclick="showPage('privacy_policy')">Privacy Policy</button>
+  
+  <button id="refreshButton" class="button" onclick="refreshPage()">Refresh Page</button>
+
+  <div id="content" class="page-content"></div>
+
+  <script>
+    function showPage(page) {
+      const contentDiv = document.getElementById('content');
+      contentDiv.style.display = 'block';
+      contentDiv.className = 'page-content ' + page + '-content';
+      contentDiv.innerHTML = 'Welcome to ' + capitalizeFirstLetter(page.replace('_', ' ')) + ' Page';
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+  </script>
+</body>
+</html>
