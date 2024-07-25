@@ -36,7 +36,7 @@
       ];
 
       // Send 10 fake page view events
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 100; i++) {
         const randomIndex = Math.floor(Math.random() * pages.length);
         const page = pages[randomIndex];
         sendFakePageView(page.title, page.screen);
