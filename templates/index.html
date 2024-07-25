@@ -12,7 +12,6 @@
     gtag('js', new Date());
     gtag('config', 'G-2BYZNSF0C5');
 
-    // Function to send a page view with dummy data
     function sendFakePageView(pageTitle, screenName) {
       gtag('event', 'page_view', {
         'page_title': pageTitle,
@@ -20,7 +19,6 @@
       });
     }
 
-    // Generate dummy data for real-time simulation
     function generateFakePageViews() {
       const pages = [
         { title: 'Home Page', screen: 'home' },
@@ -35,7 +33,6 @@
         { title: 'Privacy Policy', screen: 'privacy_policy' }
       ];
 
-      // Send 10 fake page view events
       for (let i = 0; i < 100; i++) {
         const randomIndex = Math.floor(Math.random() * pages.length);
         const page = pages[randomIndex];
@@ -43,25 +40,40 @@
       }
     }
 
-    // Generate fake user metrics
     function generateFakeUserMetrics() {
       const userProperties = ['new_user', 'returning_user', 'subscribed_user'];
       const sources = ['direct', 'organic_search', 'referral', 'social'];
-
+      const locations = ['New York', 'San Francisco', 'London', 'Tokyo', 'Berlin'];
+      const ages = ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'];
+      const browsers = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Opera'];
+      const countries = ['USA', 'UK', 'Japan', 'Germany', 'France'];
+      const emails = ['user@example.com', 'user2@example.com', 'user3@example.com'];
+      
       for (let i = 0; i < 40; i++) {
         const randomUserProperty = userProperties[Math.floor(Math.random() * userProperties.length)];
         const randomSource = sources[Math.floor(Math.random() * sources.length)];
+        const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+        const randomAge = ages[Math.floor(Math.random() * ages.length)];
+        const randomBrowser = browsers[Math.floor(Math.random() * browsers.length)];
+        const randomCountry = countries[Math.floor(Math.random() * countries.length)];
+        const randomEmail = emails[Math.floor(Math.random() * emails.length)];
+        const randomDate = new Date(+(new Date()) - Math.floor(Math.random()*10000000000)).toISOString().split('T')[0];  // Random date in YYYY-MM-DD format
 
         gtag('event', 'user_engagement', {
           'user_property': randomUserProperty,
           'user_source': randomSource,
+          'user_location': randomLocation,
+          'user_age': randomAge,
+          'user_browser': randomBrowser,
+          'user_country': randomCountry,
+          'user_email': randomEmail,
           'event_name': 'user_activity',
-          'engagement_time': Math.floor(Math.random() * 300) + 30  // Engagement time between 30s to 330s
+          'engagement_time': Math.floor(Math.random() * 300) + 30,
+          'event_date': randomDate
         });
       }
     }
 
-    // Trigger the fake page view generation and user metrics when the page loads
     window.onload = function() {
       generateFakePageViews();
       generateFakeUserMetrics();
@@ -70,27 +82,122 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f0f0;
-      color: #333;
       margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
       padding: 20px;
     }
-    h1 {
+    .header {
       background: #0073e6;
       color: white;
-      padding: 10px;
-      text-align: center;
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
     }
-    p {
-      background: white;
-      padding: 10px;
+    .button-container {
+      margin: 50px 0;
+    }
+    .page-button {
+      display: inline-block;
+      background-color: #0073e6;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px;
       border-radius: 5px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .page-button:hover {
+      background-color: #005bb5;
+      transform: scale(1.05);
+    }
+    .page-content {
+      display: none;
+      padding: 20px;
+      background-size: cover;
+      background-position: center;
+      height: 80vh;
+      color: white;
+    }
+    .refresh-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff5722;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .refresh-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+    .animated-home {
+      animation: slideIn 1s ease-in-out;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Website Analytics Simulation</h1>
-  <p>This Website Created to Test Google Analytics Events For Kashish</p>
-  <p>Additional user engagement metrics are also generated for simulation purposes.</p>
-</body>
-</html>
+  <div class="header">
+    <h1 class="animated-home">Website Analytics Simulation</h1>
+  </div>
+  <div class="container">
+    <div class="button-container">
+      <a href="#" class="page-button" onclick="showPage('home')">Home</a>
+      <a href="#" class="page-button" onclick="showPage('about')">About Us</a>
+      <a href="#" class="page-button" onclick="showPage('contact')">Contact Us</a>
+      <a href="#" class="page-button" onclick="showPage('services')">Our Services</a>
+      <a href="#" class="page-button" onclick="showPage('products')">Our Products</a>
+      <a href="#" class="page-button" onclick="showPage('blog')">Blog</a>
+      <a href="#" class="page-button" onclick="showPage('faq')">FAQ</a>
+      <a href="#" class="page-button" onclick="showPage('careers')">Careers</a>
+      <a href="#" class="page-button" onclick="showPage('testimonials')">Testimonials</a>
+      <a href="#" class="page-button" onclick="showPage('privacy_policy')">Privacy Policy</a>
+    </div>
+    <div id="home" class="page-content" style="background-image: url('home-bg.jpg');">
+      <h2>Welcome to the Home Page!</h2>
+    </div>
+    <div id="about" class="page-content" style="background-image: url('about-bg.jpg');">
+      <h2>Welcome to the About Us Page!</h2>
+    </div>
+    <div id="contact" class="page-content" style="background-image: url('contact-bg.jpg');">
+      <h2>Welcome to the Contact Us Page!</h2>
+    </div>
+    <div id="services" class="page-content" style="background-image: url('services-bg.jpg');">
+      <h2>Welcome to the Our Services Page!</h2>
+    </div>
+    <div id="products" class="page-content" style="background-image: url('products-bg.jpg');">
+      <h2>Welcome to the Our Products Page!</h2>
+    </div>
+    <div id="blog" class="page-content" style="background-image: url('blog-bg.jpg');">
+      <h2>Welcome to the Blog Page!</h2>
+    </div>
+    <div id="faq" class="page-content" style="background-image: url('faq-bg.jpg');">
+      <h2>Welcome to the FAQ Page!</h2>
+    </div>
+    <div id="careers" class="page-content" style="background-image: url('careers-bg.jpg');">
+      <h2>Welcome to the Careers Page!</h2>
+    </div>
+    <div id="testimonials" class="page-content" style="background-image: url('testimonials-bg.jpg');">
+      <h2>Welcome to the Testimonials Page!</h2>
+    </div>
+   
